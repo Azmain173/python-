@@ -65,6 +65,14 @@ class Solution:
 - Since we are maximizing the **minimum** difference, if `mid` is valid, we keep it (`left = mid`).
 - If `mid` is not valid, we reduce `right` (`right = mid - 1`).
 
+- left = mid Instead of left = mid + 1
+
+Since mid is a valid answer, we should not skip over it.
+This ensures we get the maximum possible tastiness.
+mid = (left + right + 1) // 2 Instead of mid = left + (right - left) // 2
+
+Prevents an infinite loop when left and right are close.
+
 ### **5. Why do we select elements greedily in the loop?**
 - We aim to select `k` elements while keeping at least `mid` difference between them.
 - By always selecting the next valid element, we maximize the difference.
