@@ -5,7 +5,7 @@ class Solution:
         right=price[-1]-price[0]
 
         while left<right:
-            mid=left+(right-left)//2
+            mid = (left + right + 1) // 2
             count=1
             last=price[0]
 
@@ -15,10 +15,10 @@ class Solution:
                     last=p
 
             if count>=k:
-                left=mid+1
+                left=mid
         
         
             else:
                 right=mid-1
 
-        return left-1
+        return left
