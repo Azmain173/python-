@@ -3,7 +3,6 @@ class Solution:
         n=len(nums)
         left=0
         right=n-1
-        mid=(right+left+1)//2
         
         while left<=right:
             mid=(right+left+1)//2
