@@ -88,15 +88,44 @@ class Solution:
 
 ---
 
-## Explanation of Code
+## Line-by-Line Explanation of Code:
 
-1. **Sorting the Intervals:**
-   - The `sort()` method sorts the intervals by their starting point. This ensures we handle intervals in chronological order.
+1. `from typing import List`
+   - **Imports the `List` type from Python's `typing` module** to specify that the input and output parameters of the `merge` method are lists of lists of integers.
 
-2. **Iterating Through Sorted Intervals:**
-   - We initialize an empty list `merge` to hold the result.
-   - As we loop through each interval, we check if it overlaps with the last merged interval. If not, we add it to the `merge` list.
-   - If there is an overlap, we update the end time of the last interval in `merge`.
+2. `class Solution:`
+   - **Defines the `Solution` class**, where we will implement our method for solving the merge intervals problem.
+
+3. `def merge(self, intervals: List[List[int]]) -> List[List[int]]:`
+   - **Defines the `merge` method** inside the `Solution` class. This method takes as input a list of intervals (`List[List[int]]`) and returns a list of merged intervals (`List[List[int]]`).
+
+4. `merge = []`
+   - **Initializes an empty list `merge`**, which will hold the final list of merged intervals.
+
+5. `intervals.sort(key=lambda interval: interval[0])`
+   - **Sorts the intervals** based on the starting time of each interval. The sorting is done using a **lambda function**, which returns the first element (`interval[0]`) of each interval. This ensures that intervals are sorted in increasing order of their start time.
+
+6. `for interval in intervals:`
+   - **Starts a loop to iterate through each interval** in the sorted list of intervals.
+
+7. `if not merge or merge[-1][1] < interval[0]:`
+   - **Checks if the `merge` list is empty or if there is no overlap** between the current interval and the last interval in the `merge` list.
+     - If the `merge` list is empty (i.e., no intervals have been merged yet) or if the end time of the last merged interval (`merge[-1][1]`) is less than the start time of the current interval (`interval[0]`), it means there is no overlap.
+     - In this case, **the current interval is added to the `merge` list**.
+
+8. `merge.append(interval)`
+   - **Appends the current interval to the `merge` list** if there is no overlap with the last interval.
+
+9. `else:`
+   - **Handles the case when an overlap exists** between the current interval and the last interval in `merge`.
+
+10. `merge[-1] = [merge[-1][0], max(merge[-1][1], interval[1])]`
+    - **Merges the current interval with the last merged interval**:
+      - The start time of the merged interval is the same as the start time of the last merged interval (`merge[-1][0]`).
+      - The end time of the merged interval is the maximum of the end times of the last merged interval (`merge[-1][1]`) and the current interval (`interval[1]`), ensuring the merged interval covers both intervals.
+
+11. `return merge`
+    - **Returns the final list of merged intervals** after processing all intervals.
 
 ---
 
@@ -112,11 +141,10 @@ class Solution:
    - If the current interval does not overlap with the last interval in the `merge` list, we simply append it to `merge`.
 
 ### 4. **How do we merge intervals?**
-   - When we detect an overlap, we modify the last interval in the `merge` list by updating its end time to the maximum of the current interval's end time and the last merged interval's end time.
+   - When we detect an overlap, we modify the last interval in `merge` by updating its end time to the maximum of the current interval's end time and the last merged interval's end time.
 
 ---
 
 ## Conclusion:
 
 This solution efficiently merges intervals with a time complexity of **O(n log n)**, which is the result of sorting. The space complexity is **O(n)** due to the storage of the result list.
-
